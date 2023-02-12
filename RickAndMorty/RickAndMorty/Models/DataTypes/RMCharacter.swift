@@ -10,7 +10,7 @@ import Foundation
 struct RMCharacter: Codable {
     let id: Int
     let name: String
-  //status  string  The status of the character ('Alive', 'Dead' or 'unknown').
+  //status string The status of the character ('Alive', 'Dead' or 'unknown').
     let status: RMCharacterStatus
     let species: String
     let type: String
