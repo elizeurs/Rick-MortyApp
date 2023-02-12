@@ -71,7 +71,7 @@ final class RMCharacterListViewViewModel: NSObject {
     guard !isLoadingMoreCharacters else {
       return
     }
-    print("Fetching more data")
+//    print("Fetching more data")
     isLoadingMoreCharacters = true
     guard let request = RMRequest(url: url) else {
       isLoadingMoreCharacters = false
@@ -103,10 +103,10 @@ final class RMCharacterListViewViewModel: NSObject {
             with: indexPathsToAdd
           )
           
-          // strongSelf.isLoadingMoreCharacters = false
+           strongSelf.isLoadingMoreCharacters = false
         }
       case .failure(let failure):
-        print(String(describing: failure))
+//        print(String(describing: failure))
         strongSelf.isLoadingMoreCharacters = false
       }
     }
