@@ -159,9 +159,9 @@
 		750396E52991760400CFE600 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				75A2D439299BD32500A8DCD1 /* CharacterDetail */,
 				758639992994452500883B2F /* RMCharacterListViewViewModel.swift */,
 				750DA3AF29953A7D00CBE007 /* RMCharacterCollectionViewCellViewModel.swift */,
-				752E06652996B5EA005A010C /* RMCharacterDetailViewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -232,9 +232,6 @@
 				7576A3A1299ACB3C002E858D /* RMCharacterPhotoCollectionViewCell.swift */,
 				7576A3A3299ACB5E002E858D /* RMCharacterInfoCollectionViewCell.swift */,
 				7576A3A5299ACB7C002E858D /* RMCharacterEpisodeCollectionViewCell.swift */,
-				7576A3A7299ACC11002E858D /* RMCharacterPhotoCollectionViewCellViewModel.swift */,
-				7576A3A9299ACC33002E858D /* RMCharacterInfoCollectionViewCellViewModel.swift */,
-				7576A3AB299ACC4C002E858D /* RMCharacterEpisodeCollectionViewCellViewModel.swift */,
 			);
 			path = CharacterDetails;
 			sourceTree = "<group>";
@@ -259,6 +256,17 @@
 				758639972994378B00883B2F /* RMGetAllCharactersResponse.swift */,
 			);
 			path = APIResponseTypes;
+			sourceTree = "<group>";
+		};
+		75A2D439299BD32500A8DCD1 /* CharacterDetail */ = {
+			isa = PBXGroup;
+			children = (
+				752E06652996B5EA005A010C /* RMCharacterDetailViewViewModel.swift */,
+				7576A3A7299ACC11002E858D /* RMCharacterPhotoCollectionViewCellViewModel.swift */,
+				7576A3A9299ACC33002E858D /* RMCharacterInfoCollectionViewCellViewModel.swift */,
+				7576A3AB299ACC4C002E858D /* RMCharacterEpisodeCollectionViewCellViewModel.swift */,
+			);
+			path = CharacterDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
