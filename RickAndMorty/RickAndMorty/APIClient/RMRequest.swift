@@ -11,7 +11,6 @@ import Foundation
 
 /// Object that represents a single API call
 final class RMRequest {
-
   /// API Constants
   private struct Constants {
     // Base url
@@ -19,7 +18,7 @@ final class RMRequest {
   }
   
   /// Desired endpoint
-  private let endpoint: RMEndpoint
+  let endpoint: RMEndpoint
   
   /// Path components for API, if any
   private let pathComponents: [String]
