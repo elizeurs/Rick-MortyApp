@@ -20,7 +20,7 @@ class RMCharacterEpisodeCollectionViewCell: UICollectionViewCell {
   private let nameLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-//    label.text = "Earth"
+    //    label.text = "Earth"
     label.font = .systemFont(ofSize: 22, weight: .regular)
     return label
   }()
@@ -28,7 +28,7 @@ class RMCharacterEpisodeCollectionViewCell: UICollectionViewCell {
   private let airDateLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-//    label.text = "Earth"
+    //    label.text = "Earth"
     label.font = .systemFont(ofSize: 18, weight: .light)
     return label
   }()
@@ -38,15 +38,18 @@ class RMCharacterEpisodeCollectionViewCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     contentView.backgroundColor = .tertiarySystemBackground
-    contentView.layer.cornerRadius = 8
-    contentView.layer.borderWidth = 2
-    contentView.layer.borderColor = UIColor.systemBlue.cgColor
+    setUpLayer()
     contentView.addSubviews(seasonLabel, nameLabel, airDateLabel)
     setUpConstraints()
   }
   
   required init?(coder: NSCoder) {
     fatalError()
+  }
+  
+  private func setUpLayer() {
+    contentView.layer.cornerRadius = 8
+    contentView.layer.borderWidth = 2
   }
   
   private func setUpConstraints() {
@@ -65,7 +68,7 @@ class RMCharacterEpisodeCollectionViewCell: UICollectionViewCell {
       airDateLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
       airDateLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
       airDateLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.3)
-
+      
     ])
   }
   
@@ -82,11 +85,12 @@ class RMCharacterEpisodeCollectionViewCell: UICollectionViewCell {
       self?.nameLabel.text = data.name
       self?.seasonLabel.text = "Episode "+data.episode
       self?.airDateLabel.text = "Aired on "+data.air_date
-//      print(data.name)
-//      print(data.air_date)
-//      print(data.episode)
-//      print(String(describing: data))
+      //      print(data.name)
+      //      print(data.air_date)
+      //      print(data.episode)
+      //      print(String(describing: data))
     }
     viewModel.fetchEpisode()
+    contentView.layer.borderColor = viewModel.borderColor.cgColor
   }
 }
