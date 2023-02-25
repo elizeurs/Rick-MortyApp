@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import SafariServices
+import StoreKit
 
 /// Controller to show various app options and settings
 final class RMSettingsViewController: UIViewController {
@@ -62,6 +63,9 @@ final class RMSettingsViewController: UIViewController {
       present(vc, animated: true)
     } else if option == .rateApp {
       // show rating prompt
+      if let windowScene = view.window?.windowScene {
+        SKStoreReviewController.requestReview(in: windowScene)
+      }
     }
   }
 }
