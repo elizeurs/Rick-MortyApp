@@ -8,15 +8,17 @@
 import UIKit
 
 // Identifiable - gives us a unique id, so in swiftui, actually loops over them.
-struct RMSettingsCellViewModel: Identifiable, Hashable {
+struct RMSettingsCellViewModel: Identifiable {
   let id = UUID()
   
-  private let type: RMSettingsOption
+  public let type: RMSettingsOption
+  public let onTapHandler: (RMSettingsOption) -> Void
   
   // MARK: - Init
   
-  init(type: RMSettingsOption) {
+  init(type: RMSettingsOption, onTapHandler: @escaping (RMSettingsOption) -> Void) {
     self.type = type
+    self.onTapHandler = onTapHandler
   }
   
   // MARK: - Public
