@@ -77,7 +77,7 @@ final class RMSearchViewController: UIViewController {
   
   @objc
   private func didTapExecuteSearch() {
-//    viewModel.executeSearch()
+    viewModel.executeSearch()
   }
 
   private func addConstraints() {
@@ -94,7 +94,10 @@ final class RMSearchViewController: UIViewController {
 
 extension RMSearchViewController: RMSearchViewDelegate {
   func rmSearchView(_ searchView: RMSearchView, didSelectOption option: RMSearchInputViewViewModel.DynamicOption) {
-    let vc = RMSearchOptionPickerViewController(option: option) { selection in
+    let vc = RMSearchOptionPickerViewController(option: option) { [weak self] selection in
+      DispatchQueue.main.async {
+        self?.viewModel.set(value: selection, for: option)
+      }
       print("Did select \(selection)")
     }
     // detents - are a way where you can specify like what heights are we allowing our bottom sheet to use.

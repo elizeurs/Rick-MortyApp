@@ -39,6 +39,12 @@ final class RMSearchView: UIView {
     
     searchInputView.configure(with: RMSearchInputViewViewModel(type: viewModel.config.type))
     searchInputView.delegate = self
+    
+    viewModel.registerOptionChangeBlock { tuple in
+      // tuple: Option | newValue
+      self.searchInputView.update(option: tuple.0, value: tuple.1)
+      print(String(describing: tuple))
+    }
   }
   
   required init?(coder: NSCoder) {
