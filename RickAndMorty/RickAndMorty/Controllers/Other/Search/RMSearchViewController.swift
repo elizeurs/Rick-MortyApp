@@ -94,8 +94,13 @@ final class RMSearchViewController: UIViewController {
 
 extension RMSearchViewController: RMSearchViewDelegate {
   func rmSearchView(_ searchView: RMSearchView, didSelectOption option: RMSearchInputViewViewModel.DynamicOption) {
+    let vc = RMSearchOptionPickerViewController(option: option) { selection in
+      print("Did select \(selection)")
+    }
+    // detents - are a way where you can specify like what heights are we allowing our bottom sheet to use.
+    vc.sheetPresentationController?.detents = [.medium()]
+    vc.sheetPresentationController?.prefersGrabberVisible = true
+    present(vc, animated: true)
     print("Should present option picker")
   }
-  
-  
 }
