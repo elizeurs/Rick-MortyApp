@@ -14,7 +14,7 @@ protocol RMLocationViewDelegate: AnyObject {
 final class RMLocationView: UIView {
   
   public weak var delegate: RMLocationViewDelegate?
-  
+    
   private var viewModel: RMLocationViewViewModel? {
     didSet {
       spinner.stopAnimating()
@@ -112,5 +112,41 @@ extension RMLocationView: UITableViewDataSource {
 //    cell.textLabel?.text = cellViewModel.name
 //    cell.textLabel?.text = "Hello Rick and Morty"
     return cell
+  }
+}
+
+// MARK: - ScrollView
+extension RMLocationView: UIScrollViewDelegate {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    guard let viewModel = viewModel,
+          !viewModel.cellViewModels.isEmpty,
+          viewModel.shouldShowLoadMoreIndicator,
+          !viewModel.isLoadingMoreLocations else {
+      return
+    }
+    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { [weak self] t in
+      let offset = scrollView.contentOffset.y
+      let totalContentHeight = scrollView.contentSize.height
+      let totalScrollViewFixedHeight = scrollView.frame.size.height
+      
+      if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
+        DispatchQueue.main.async {
+          self?.showLoadingIndicator()
+        }
+        viewModel.fetchAdditionalLocations()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+          print("Refreshing table rows")
+          self?.tableView.reloadData()
+        })
+      }
+      t.invalidate()
+    }
+  }
+  
+  private func showLoadingIndicator() {
+    let footer = RMTableLoadingFooterView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 100))
+//    footer.backgroundColor = .red
+    tableView.tableFooterView = footer
   }
 }
