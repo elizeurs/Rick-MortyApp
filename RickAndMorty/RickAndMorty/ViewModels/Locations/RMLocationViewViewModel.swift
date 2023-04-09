@@ -50,7 +50,7 @@ final class RMLocationViewViewModel {
     self.didFinishPagination = block
   }
   
-  /// Paginate, if additional episodes are needed
+  /// Paginate, if additional locations are needed
   public func fetchAdditionalLocations() {
     guard !isLoadingMoreLocations else {
       return

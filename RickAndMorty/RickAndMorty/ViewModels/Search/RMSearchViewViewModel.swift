@@ -42,6 +42,9 @@ final class RMSearchViewViewModel {
   }
   
   public func executeSearch() {
+    guard !searchText.trimmingCharacters(in: .whitespaces).isEmpty else {
+      return
+    }
     // Create Request based on filters
     // &status=alive
     // https://rickandmortyapi.com/api/character/?name=rick&status=alive
@@ -97,7 +100,8 @@ final class RMSearchViewViewModel {
   }
   
   private func processSearchResults(model: Codable) {
-    var resultsVM: RMSearchResultViewModel?
+    var resultsVM: RMSearchResultType?
+    var nextUrl: String?
     if let characterResults = model as? RMGetAllCharactersResponse {
       resultsVM = .characters(characterResults.results.compactMap({
         return RMCharacterCollectionViewCellViewModel(
@@ -106,6 +110,7 @@ final class RMSearchViewViewModel {
           characterImageUrl: URL(string: $0.image)
         )
       }))
+      nextUrl = characterResults.info.next
     }
     else if let episodesResults = model as? RMGetAllEpisodesResponse {
       resultsVM = .episodes(episodesResults.results.compactMap({
@@ -113,16 +118,19 @@ final class RMSearchViewViewModel {
           episodeDataUrl: URL(string: $0.url)
         )
       }))
+      nextUrl = episodesResults.info.next
     }
     else if let LocationsResults = model as? RMGetAllLocationsResponse {
       resultsVM = .locations(LocationsResults.results.compactMap({
         return RMLocationTableViewCellViewModel(location: $0)
       }))
+      nextUrl = LocationsResults.info.next
     }
     
     if let results = resultsVM {
       self.searchResultModel = model
-      self.searchResultHandler?(results)
+      let vm = RMSearchResultViewModel(results: results, next: nextUrl)
+      self.searchResultHandler?(vm)
     }
     else {
       // fallback error
